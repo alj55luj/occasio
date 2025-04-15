@@ -40,12 +40,8 @@ const userSchema = new mongoose.Schema(
       type: Boolean,
       default: true,
     },
-    createdAt: {
-      type: Date,
-      default: Date.now(),
-    },
   },
-  { versionKey: false },
+  { versionKey: false, timestamps: true },
 );
 // <creating-function-schema />
 userSchema.pre('save', async function (next) {

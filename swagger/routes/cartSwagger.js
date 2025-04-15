@@ -1,20 +1,17 @@
----
-to: ./swagger/routes/<%=  name %>Swagger.js
----
 /**
  * @swagger
  * tags:
- *   name: <%= h.inflection.pluralize(Name) %>
- *   description: <%= Name %> management and retrieval
+ *   name: Carts
+ *   description: Cart management and retrieval
  */
 
 /**
  * @swagger
- * /<%= h.inflection.pluralize(name) %>:
+ * /carts:
  *   post:
- *     summary: Create a <%= name %>
- *     description: <%= rolePost %> can create <%= name %>.
- *     tags: [<%= h.inflection.pluralize(Name) %>]
+ *     summary: Create a cart
+ *     description: USER,ADMIN can create cart.
+ *     tags: [Carts]
  *     security:
  *       - bearerAuth: []
  *     requestBody:
@@ -22,7 +19,7 @@ to: ./swagger/routes/<%=  name %>Swagger.js
  *       content:
  *         application/json:
  *           schema:
- *             $ref: '#/components/schemas/create<%= Name %>'
+ *             $ref: '#/components/schemas/createCart'
  *     responses:
  *       "201":
  *         description: Created
@@ -35,7 +32,7 @@ to: ./swagger/routes/<%=  name %>Swagger.js
  *                   type: string
  *                   example: success
  *                 doc:
- *                     $ref: '#/components/schemas/<%= Name %>'
+ *                     $ref: '#/components/schemas/Cart'
  *       "400":
  *         $ref: '#/components/responses/DuplicateEmail'
  *       "401":
@@ -44,9 +41,9 @@ to: ./swagger/routes/<%=  name %>Swagger.js
  *         $ref: '#/components/responses/Forbidden'
  *
  *   get:
- *     summary: Get all <%= h.inflection.pluralize(name) %>
- *     description: <%= roleGet %> can retrieve all <%= h.inflection.pluralize(name) %>.
- *     tags: [<%= h.inflection.pluralize(Name) %>]
+ *     summary: Get all carts
+ *     description: USER,ADMIN can retrieve all carts.
+ *     tags: [Carts]
  *     security:
  *       - Bearer: []
  *     parameters:
@@ -68,7 +65,7 @@ to: ./swagger/routes/<%=  name %>Swagger.js
  *           type: integer
  *           minimum: 1
  *         default: 10
- *         description: Maximum number of <%= h.inflection.pluralize(name) %>
+ *         description: Maximum number of carts
  *       - in: query
  *         name: search
  *         schema:
@@ -103,7 +100,7 @@ to: ./swagger/routes/<%=  name %>Swagger.js
  *                 doc:
  *                   type: array
  *                   items:
- *                     $ref: '#/components/schemas/<%= Name %>'
+ *                     $ref: '#/components/schemas/Cart'
  *       "401":
  *         $ref: '#/components/responses/Unauthorized'
  *       "403":
@@ -112,11 +109,11 @@ to: ./swagger/routes/<%=  name %>Swagger.js
 
 /**
  * @swagger
- * /<%= h.inflection.pluralize(name) %>/{id}:
+ * /carts/{id}:
  *   get:
- *     summary: Get a <%= name %>
- *     description: <%= roleGet %> can use this router.
- *     tags: [<%= h.inflection.pluralize(Name) %>]
+ *     summary: Get a cart
+ *     description: USER,ADMIN can use this router.
+ *     tags: [Carts]
  *     security:
  *       - bearerAuth: []
  *     parameters:
@@ -125,7 +122,7 @@ to: ./swagger/routes/<%=  name %>Swagger.js
  *         required: true
  *         schema:
  *           type: string
- *         description: <%= Name %> id
+ *         description: Cart id
  *     responses:
  *       "200":
  *         description: OK
@@ -138,7 +135,7 @@ to: ./swagger/routes/<%=  name %>Swagger.js
  *                   type: string
  *                   example: success
  *                 doc:
- *                     $ref: '#/components/schemas/<%= Name %>'
+ *                     $ref: '#/components/schemas/Cart'
  *       "401":
  *         $ref: '#/components/responses/Unauthorized'
  *       "403":
@@ -147,9 +144,9 @@ to: ./swagger/routes/<%=  name %>Swagger.js
  *         $ref: '#/components/responses/NotFound'
  *
  *   patch:
- *     summary: Update a <%= name %>
- *     description: <%= roleUpdate %> can use this router.
- *     tags: [<%= h.inflection.pluralize(Name) %>]
+ *     summary: Update a cart
+ *     description: USER,ADMIN can use this router.
+ *     tags: [Carts]
  *     security:
  *       - bearerAuth: []
  *     parameters:
@@ -158,13 +155,13 @@ to: ./swagger/routes/<%=  name %>Swagger.js
  *         required: true
  *         schema:
  *           type: string
- *         description: <%= Name %> id
+ *         description: Cart id
  *     requestBody:
  *         required: true
  *         content:
  *           application/json:
  *             schema:
- *               $ref: '#/components/schemas/update<%= Name %>'
+ *               $ref: '#/components/schemas/updateCart'
  *     responses:
  *       "200":
  *         description: OK
@@ -177,7 +174,7 @@ to: ./swagger/routes/<%=  name %>Swagger.js
  *                   type: string
  *                   example: success
  *                 doc:
- *                     $ref: '#/components/schemas/<%= Name %>'
+ *                     $ref: '#/components/schemas/Cart'
  *       "401":
  *         $ref: '#/components/responses/Unauthorized'
  *       "403":
@@ -186,9 +183,9 @@ to: ./swagger/routes/<%=  name %>Swagger.js
  *         $ref: '#/components/responses/NotFound'
  *
  *   delete:
- *     summary: Delete a  <%= name %>.
- *     description: <%= roleDelete %> can use this router.
- *     tags: [<%= h.inflection.pluralize(Name) %>]
+ *     summary: Delete a  cart.
+ *     description: USER,ADMIN can use this router.
+ *     tags: [Carts]
  *     security:
  *       - bearerAuth: []
  *     parameters:
@@ -197,7 +194,7 @@ to: ./swagger/routes/<%=  name %>Swagger.js
  *         required: true
  *         schema:
  *           type: string
- *         description: <%= Name %> id
+ *         description: Cart id
  *     responses:
  *       "200":
  *         description: OK
@@ -220,39 +217,56 @@ to: ./swagger/routes/<%=  name %>Swagger.js
  *         $ref: '#/components/responses/NotFound'
  */
 
-
-exports.<%= Name %> = {
+exports.Cart = {
   type: 'object',
   properties: {
     id: { type: 'string' },
-// property
+    // property
+    cartprice: { type: 'number' },
+    quantity: { type: 'number' },
   },
   example: {
     _id: '5ebac534954b54139806c112',
-// property example
-   createdAt: "2024-11-24T16:35:04.438Z",
-   updatedAt: "2024-11-24T16:35:04.438Z"
-  },
-};
-exports.create<%= Name %> = {
-  type: 'object',
-  properties: {
-// create property
-  },
-  example: {
-// create property example
-  },
-  required:[
-// required property
-  ]
-};
-exports.update<%= Name %> = {
-  type: 'object',
-  properties: {
-// update property
-  },
-  example: {
-// update property example
-  },
-};
+    // property example
+    cartprice: 70000,
 
+    quantity: 4,
+
+    createdAt: '2024-11-24T16:35:04.438Z',
+    updatedAt: '2024-11-24T16:35:04.438Z',
+  },
+};
+exports.createCart = {
+  type: 'object',
+  properties: {
+    // create property
+    cartprice: { type: 'number' },
+    quantity: { type: 'number' },
+  },
+  example: {
+    // create property example
+    cartprice: 70000,
+
+    quantity: 4,
+  },
+  required: [
+    // required property
+    'cartprice',
+
+    'quantity',
+  ],
+};
+exports.updateCart = {
+  type: 'object',
+  properties: {
+    // update property
+    cartprice: { type: 'number' },
+    quantity: { type: 'number' },
+  },
+  example: {
+    // update property example
+    cartprice: 70000,
+
+    quantity: 4,
+  },
+};

@@ -1,0 +1,9 @@
+const Cart = require('../models/cartModel');
+const AppError = require('../utils/appError');
+const handlerFactory = require('../utils/handlerFactory');
+const catchAsync = require('../utils/catchAsync');
+exports.getCart = handlerFactory.getOne(Cart);
+exports.createCart = handlerFactory.createOne(Cart);
+exports.updateCart = handlerFactory.updateOne(Cart);
+exports.deleteCart = handlerFactory.deleteOne(Cart);
+exports.getAllCart = handlerFactory.getAll(Cart);

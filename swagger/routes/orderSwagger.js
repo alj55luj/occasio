@@ -1,20 +1,17 @@
----
-to: ./swagger/routes/<%=  name %>Swagger.js
----
 /**
  * @swagger
  * tags:
- *   name: <%= h.inflection.pluralize(Name) %>
- *   description: <%= Name %> management and retrieval
+ *   name: Orders
+ *   description: Order management and retrieval
  */
 
 /**
  * @swagger
- * /<%= h.inflection.pluralize(name) %>:
+ * /orders:
  *   post:
- *     summary: Create a <%= name %>
- *     description: <%= rolePost %> can create <%= name %>.
- *     tags: [<%= h.inflection.pluralize(Name) %>]
+ *     summary: Create a order
+ *     description: USER,ADMIN can create order.
+ *     tags: [Orders]
  *     security:
  *       - bearerAuth: []
  *     requestBody:
@@ -22,7 +19,7 @@ to: ./swagger/routes/<%=  name %>Swagger.js
  *       content:
  *         application/json:
  *           schema:
- *             $ref: '#/components/schemas/create<%= Name %>'
+ *             $ref: '#/components/schemas/createOrder'
  *     responses:
  *       "201":
  *         description: Created
@@ -35,7 +32,7 @@ to: ./swagger/routes/<%=  name %>Swagger.js
  *                   type: string
  *                   example: success
  *                 doc:
- *                     $ref: '#/components/schemas/<%= Name %>'
+ *                     $ref: '#/components/schemas/Order'
  *       "400":
  *         $ref: '#/components/responses/DuplicateEmail'
  *       "401":
@@ -44,9 +41,9 @@ to: ./swagger/routes/<%=  name %>Swagger.js
  *         $ref: '#/components/responses/Forbidden'
  *
  *   get:
- *     summary: Get all <%= h.inflection.pluralize(name) %>
- *     description: <%= roleGet %> can retrieve all <%= h.inflection.pluralize(name) %>.
- *     tags: [<%= h.inflection.pluralize(Name) %>]
+ *     summary: Get all orders
+ *     description: USER,ADMIN,DELIVERY can retrieve all orders.
+ *     tags: [Orders]
  *     security:
  *       - Bearer: []
  *     parameters:
@@ -68,7 +65,7 @@ to: ./swagger/routes/<%=  name %>Swagger.js
  *           type: integer
  *           minimum: 1
  *         default: 10
- *         description: Maximum number of <%= h.inflection.pluralize(name) %>
+ *         description: Maximum number of orders
  *       - in: query
  *         name: search
  *         schema:
@@ -103,7 +100,7 @@ to: ./swagger/routes/<%=  name %>Swagger.js
  *                 doc:
  *                   type: array
  *                   items:
- *                     $ref: '#/components/schemas/<%= Name %>'
+ *                     $ref: '#/components/schemas/Order'
  *       "401":
  *         $ref: '#/components/responses/Unauthorized'
  *       "403":
@@ -112,11 +109,11 @@ to: ./swagger/routes/<%=  name %>Swagger.js
 
 /**
  * @swagger
- * /<%= h.inflection.pluralize(name) %>/{id}:
+ * /orders/{id}:
  *   get:
- *     summary: Get a <%= name %>
- *     description: <%= roleGet %> can use this router.
- *     tags: [<%= h.inflection.pluralize(Name) %>]
+ *     summary: Get a order
+ *     description: USER,ADMIN,DELIVERY can use this router.
+ *     tags: [Orders]
  *     security:
  *       - bearerAuth: []
  *     parameters:
@@ -125,7 +122,7 @@ to: ./swagger/routes/<%=  name %>Swagger.js
  *         required: true
  *         schema:
  *           type: string
- *         description: <%= Name %> id
+ *         description: Order id
  *     responses:
  *       "200":
  *         description: OK
@@ -138,7 +135,7 @@ to: ./swagger/routes/<%=  name %>Swagger.js
  *                   type: string
  *                   example: success
  *                 doc:
- *                     $ref: '#/components/schemas/<%= Name %>'
+ *                     $ref: '#/components/schemas/Order'
  *       "401":
  *         $ref: '#/components/responses/Unauthorized'
  *       "403":
@@ -147,9 +144,9 @@ to: ./swagger/routes/<%=  name %>Swagger.js
  *         $ref: '#/components/responses/NotFound'
  *
  *   patch:
- *     summary: Update a <%= name %>
- *     description: <%= roleUpdate %> can use this router.
- *     tags: [<%= h.inflection.pluralize(Name) %>]
+ *     summary: Update a order
+ *     description: USER,ADMIN can use this router.
+ *     tags: [Orders]
  *     security:
  *       - bearerAuth: []
  *     parameters:
@@ -158,13 +155,13 @@ to: ./swagger/routes/<%=  name %>Swagger.js
  *         required: true
  *         schema:
  *           type: string
- *         description: <%= Name %> id
+ *         description: Order id
  *     requestBody:
  *         required: true
  *         content:
  *           application/json:
  *             schema:
- *               $ref: '#/components/schemas/update<%= Name %>'
+ *               $ref: '#/components/schemas/updateOrder'
  *     responses:
  *       "200":
  *         description: OK
@@ -177,7 +174,7 @@ to: ./swagger/routes/<%=  name %>Swagger.js
  *                   type: string
  *                   example: success
  *                 doc:
- *                     $ref: '#/components/schemas/<%= Name %>'
+ *                     $ref: '#/components/schemas/Order'
  *       "401":
  *         $ref: '#/components/responses/Unauthorized'
  *       "403":
@@ -186,9 +183,9 @@ to: ./swagger/routes/<%=  name %>Swagger.js
  *         $ref: '#/components/responses/NotFound'
  *
  *   delete:
- *     summary: Delete a  <%= name %>.
- *     description: <%= roleDelete %> can use this router.
- *     tags: [<%= h.inflection.pluralize(Name) %>]
+ *     summary: Delete a  order.
+ *     description: USER,ADMIN can use this router.
+ *     tags: [Orders]
  *     security:
  *       - bearerAuth: []
  *     parameters:
@@ -197,7 +194,7 @@ to: ./swagger/routes/<%=  name %>Swagger.js
  *         required: true
  *         schema:
  *           type: string
- *         description: <%= Name %> id
+ *         description: Order id
  *     responses:
  *       "200":
  *         description: OK
@@ -220,39 +217,56 @@ to: ./swagger/routes/<%=  name %>Swagger.js
  *         $ref: '#/components/responses/NotFound'
  */
 
-
-exports.<%= Name %> = {
+exports.Order = {
   type: 'object',
   properties: {
     id: { type: 'string' },
-// property
+    // property
+    total: { type: 'number' },
+    address: { type: 'string' },
   },
   example: {
     _id: '5ebac534954b54139806c112',
-// property example
-   createdAt: "2024-11-24T16:35:04.438Z",
-   updatedAt: "2024-11-24T16:35:04.438Z"
-  },
-};
-exports.create<%= Name %> = {
-  type: 'object',
-  properties: {
-// create property
-  },
-  example: {
-// create property example
-  },
-  required:[
-// required property
-  ]
-};
-exports.update<%= Name %> = {
-  type: 'object',
-  properties: {
-// update property
-  },
-  example: {
-// update property example
-  },
-};
+    // property example
+    total: 100000,
 
+    address: 'halap aljadideh ',
+
+    createdAt: '2024-11-24T16:35:04.438Z',
+    updatedAt: '2024-11-24T16:35:04.438Z',
+  },
+};
+exports.createOrder = {
+  type: 'object',
+  properties: {
+    // create property
+    total: { type: 'number' },
+    address: { type: 'string' },
+  },
+  example: {
+    // create property example
+    total: 100000,
+
+    address: 'halap aljadideh ',
+  },
+  required: [
+    // required property
+    'total',
+
+    'address',
+  ],
+};
+exports.updateOrder = {
+  type: 'object',
+  properties: {
+    // update property
+    total: { type: 'number' },
+    address: { type: 'string' },
+  },
+  example: {
+    // update property example
+    total: 100000,
+
+    address: 'halap aljadideh ',
+  },
+};

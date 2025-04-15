@@ -1,4 +1,11 @@
 const swaggerJsDoc = require('swagger-jsdoc');
+const { Cart, createCart, updateCart } = require('./routes/cartSwagger');
+const { Order, createOrder, updateOrder } = require('./routes/orderSwagger');
+const {
+  Product,
+  createProduct,
+  updateProduct,
+} = require('./routes/productSwagger');
 const { signUp } = require('./routes/auth');
 const { User, updateMe, createUser } = require('./routes/users');
 const {
@@ -27,6 +34,15 @@ const options = {
     ],
     components: {
       schemas: {
+        Cart,
+        createCart,
+        updateCart,
+        Order,
+        createOrder,
+        updateOrder,
+        Product,
+        createProduct,
+        updateProduct,
         signUp,
         createUser,
         updateMe,
