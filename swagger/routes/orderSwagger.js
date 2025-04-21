@@ -222,12 +222,40 @@ exports.Order = {
   properties: {
     id: { type: 'string' },
     // property
+    cart: {
+      type: 'array',
+      items: {
+        type: 'object',
+        properties: {
+          //  properties cart
+          price: { type: 'number' },
+
+          quantity: { type: 'number' },
+
+          product: { type: 'string' },
+        },
+      },
+    },
+    user: { type: 'string' },
     total: { type: 'number' },
     address: { type: 'string' },
   },
   example: {
     _id: '5ebac534954b54139806c112',
     // property example
+    cart: [
+      {
+        // property example cart
+        price: 16000,
+
+        quantity: 4,
+
+        productId: '673c40cd59e293827f79e398',
+      },
+    ],
+
+    userId: '673c40cd59e293827f79e398',
+
     total: 100000,
 
     address: 'halap aljadideh ',
@@ -240,17 +268,51 @@ exports.createOrder = {
   type: 'object',
   properties: {
     // create property
+    cart: {
+      type: 'array',
+      items: {
+        type: 'object',
+        properties: {
+          //  create  properties cart
+          price: { type: 'number' },
+
+          quantity: { type: 'number' },
+
+          product: { type: 'string' },
+        },
+      },
+    },
+
     total: { type: 'number' },
     address: { type: 'string' },
   },
   example: {
     // create property example
+    cart: [
+      {
+        // create property example cart
+        price: 16000,
+
+        quantity: 4,
+
+        productId: '673c40cd59e293827f79e398',
+      },
+    ],
+
     total: 100000,
 
     address: 'halap aljadideh ',
   },
   required: [
     // required property
+    'cart.price',
+
+    'cart.quantity',
+
+    'cart.product',
+
+    'user',
+
     'total',
 
     'address',
@@ -260,11 +322,37 @@ exports.updateOrder = {
   type: 'object',
   properties: {
     // update property
+    cart: {
+      type: 'array',
+      items: {
+        type: 'object',
+        properties: {
+          //  update properties cart
+          price: { type: 'number' },
+
+          quantity: { type: 'number' },
+
+          product: { type: 'string' },
+        },
+      },
+    },
+
     total: { type: 'number' },
     address: { type: 'string' },
   },
   example: {
     // update property example
+    cart: [
+      {
+        // update property example cart
+        price: 16000,
+
+        quantity: 4,
+
+        productId: '673c40cd59e293827f79e398',
+      },
+    ],
+
     total: 100000,
 
     address: 'halap aljadideh ',

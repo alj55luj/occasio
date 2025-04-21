@@ -74,14 +74,12 @@ app.use(
 //ضغط البيانات قبل ارسالها من اجل تسريع النقل
 app.use(compression());
 //R <dont remove this line>
-const cartRouter = require('./routes/cartRoutes');
 const orderRouter = require('./routes/orderRoutes');
 const productRouter = require('./routes/productRoutes');
 const userRouter = require('./routes/userRoutes');
 
 app.use('/docs', swaggerUI.serve, swaggerUI.setup(swaggerSpec));
 //ROUTES <dont remove this line>
-app.use('/api/v1.0.0/carts', cartRouter);
 app.use('/api/v1.0.0/orders', orderRouter);
 app.use('/api/v1.0.0/products', productRouter);
 app.use('/api/v1.0.0/users', userRouter);
