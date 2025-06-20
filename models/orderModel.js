@@ -1,7 +1,12 @@
+const { payment } = require('../utils/enum');
 const mongoose = require('mongoose');
 const orderSchema = new mongoose.Schema(
   {
     // <creating-property-schema />
+    methodPayment: {
+      type: String,
+      enum: Object.values(payment),
+    },
     cart: [
       {
         // <creating-property-object-cart />

@@ -77,10 +77,12 @@ app.use(compression());
 const orderRouter = require('./routes/orderRoutes');
 const productRouter = require('./routes/productRoutes');
 const userRouter = require('./routes/userRoutes');
+const imageRouter = require('./routes/imageRoutes');
 
 app.use('/docs', swaggerUI.serve, swaggerUI.setup(swaggerSpec));
 //ROUTES <dont remove this line>
 app.use('/api/v1.0.0/orders', orderRouter);
+app.use('/api/v1.0.0/images', imageRouter);
 app.use('/api/v1.0.0/products', productRouter);
 app.use('/api/v1.0.0/users', userRouter);
 //في حال طلب مورد غير موجود

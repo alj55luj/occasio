@@ -13,3 +13,7 @@ exports.Env = {
   test: 'test',
 };
 // <creating-enum-type />
+exports.payment = {
+  cash: 'cash',
+  creditcard: 'creditcard',
+};

@@ -222,6 +222,7 @@ exports.Order = {
   properties: {
     id: { type: 'string' },
     // property
+    methodPayment: { type: 'string', enum: ['cash', 'creditcard'] },
     cart: {
       type: 'array',
       items: {
@@ -243,6 +244,8 @@ exports.Order = {
   example: {
     _id: '5ebac534954b54139806c112',
     // property example
+    methodPayment: 'cash',
+
     cart: [
       {
         // property example cart
@@ -268,6 +271,7 @@ exports.createOrder = {
   type: 'object',
   properties: {
     // create property
+    methodPayment: { type: 'string', enum: ['cash', 'creditcard'] },
     cart: {
       type: 'array',
       items: {
@@ -288,6 +292,8 @@ exports.createOrder = {
   },
   example: {
     // create property example
+    methodPayment: 'cash',
+
     cart: [
       {
         // create property example cart
@@ -305,6 +311,7 @@ exports.createOrder = {
   },
   required: [
     // required property
+
     'cart.price',
 
     'cart.quantity',
@@ -322,6 +329,7 @@ exports.updateOrder = {
   type: 'object',
   properties: {
     // update property
+    methodPayment: { type: 'string', enum: ['cash', 'creditcard'] },
     cart: {
       type: 'array',
       items: {
@@ -342,6 +350,8 @@ exports.updateOrder = {
   },
   example: {
     // update property example
+    methodPayment: 'cash',
+
     cart: [
       {
         // update property example cart
